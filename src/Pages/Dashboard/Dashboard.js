@@ -8,7 +8,6 @@ import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
 import HomeIcon from '@mui/icons-material/Home';
 import List from '@mui/material/List';
-import ReviewsIcon from '@mui/icons-material/Reviews';
 import StorefrontIcon from '@mui/icons-material/Storefront';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -17,32 +16,27 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import MenuIcon from '@mui/icons-material/Menu';
-import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import LocalConvenienceStoreIcon from '@mui/icons-material/LocalConvenienceStore';
-import DashboardCustomizeIcon from '@mui/icons-material/DashboardCustomize';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import useAuth from '../../hooks/useAuth';
 import {
-    BrowserRouter as Router,
     Switch,
     Route,
     NavLink,
     Link,
-    useParams,
     useRouteMatch
   } from "react-router-dom";
 import MyCourses from './MyCourses/MyCourses';
 import ManageAllOrder from './ManageAllOrder/ManageAllOrder';
 import AddACourse from './AddACourse/AddACourse';
-import Home from '../Home/Home';
 import MakeAdmin from './MakeAdmin/MakeAdmin';
 import AdminRoute from '../AdminRoute/AdminRoute';
 import ManageProduct from '../ManageProduct/ManageProduct';
 
 const drawerWidth = 240;
 const Dashboard = (props) => {
-    const { admin,user,logout } = useAuth();
+    const { admin,logout } = useAuth();
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
     
@@ -81,7 +75,7 @@ const Dashboard = (props) => {
       </Box>:
       <Box>
       <Divider />
-      <Link style={{ display: "flex", textDecoration: "none", color: "#333" }} to={`${url}/`}>
+      <Link style={{ display: "flex", textDecoration: "none", color: "#333" }} to={`${url}`}>
             <ListItem button>
               <ListItemIcon>
                 <StorefrontIcon />
@@ -195,19 +189,19 @@ const Dashboard = (props) => {
            <Route  path={`${path}/myorder`}>
               <MyCourses></MyCourses> 
            </Route>
-           <Route exact path={`${path}/myCourses`}>
+           <Route  path={`${path}/myCourses`}>
               <MyCourses></MyCourses> 
            </Route>
-           <AdminRoute exact path={`${path}/manageAllOrders`}>
+           <AdminRoute  path={`${path}/manageAllOrders`}>
               <ManageAllOrder></ManageAllOrder>
            </AdminRoute>
-           <AdminRoute exact path={`${path}/addACourse`}>
+           <AdminRoute  path={`${path}/addACourse`}>
               <AddACourse></AddACourse>
            </AdminRoute>
            <AdminRoute exact path={`${path}/`}>
             <ManageProduct></ManageProduct>
           </AdminRoute>
-           <AdminRoute exact path={`${path}/MakeAdmin`}>
+           <AdminRoute  path={`${path}/MakeAdmin`}>
               <MakeAdmin></MakeAdmin>
            </AdminRoute>
        </Switch>
