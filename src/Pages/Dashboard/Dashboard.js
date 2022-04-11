@@ -9,6 +9,7 @@ import IconButton from '@mui/material/IconButton';
 import HomeIcon from '@mui/icons-material/Home';
 import List from '@mui/material/List';
 import ReviewsIcon from '@mui/icons-material/Reviews';
+import StorefrontIcon from '@mui/icons-material/Storefront';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
@@ -36,10 +37,12 @@ import ManageAllOrder from './ManageAllOrder/ManageAllOrder';
 import AddACourse from './AddACourse/AddACourse';
 import Home from '../Home/Home';
 import MakeAdmin from './MakeAdmin/MakeAdmin';
+import AdminRoute from '../AdminRoute/AdminRoute';
+import ManageProduct from '../ManageProduct/ManageProduct';
 
 const drawerWidth = 240;
 const Dashboard = (props) => {
-    const { user,logout } = useAuth();
+    const { admin,user,logout } = useAuth();
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
     
@@ -62,55 +65,51 @@ const Dashboard = (props) => {
           </NavLink>
       <Divider />
       <List>
-         <Box>
-            
-          <Link style={{ display: "flex", textDecoration: "none", color: "#333" }} to={`${url}`}>
-            <ListItem button>
-              <ListItemIcon>
-                <DashboardCustomizeIcon />
-              </ListItemIcon>
-              <ListItemText primary="Dashboard" />
-            </ListItem>
-          </Link>
-          <Link style={{ display: "flex", textDecoration: "none", color: "#333" }} to={`${url}/myCourses`}>
-            <ListItem button>
-              <ListItemIcon>
-                <ShoppingBasketIcon />
-              </ListItemIcon>
-              <ListItemText primary="My Courses" />
-            </ListItem>
-          </Link>
-        </Box>
+        {!admin ? 
         <Box>
-          <Divider />
-          <Link style={{ display: "flex", textDecoration: "none", color: "#333" }} to={`${url}/manageAllOrders`}>
+        <Divider />
+        <Link style={{ display: "flex", textDecoration: "none", color: "#333" }} to={`${url}/myorder`}>
+          <ListItem button>
+            <ListItemIcon>
+              <LocalConvenienceStoreIcon />
+            </ListItemIcon>
+            <ListItemText primary="My couses" />
+          </ListItem>
+        </Link>
+
+        
+      </Box>:
+      <Box>
+      <Divider />
+      <Link style={{ display: "flex", textDecoration: "none", color: "#333" }} to={`${url}/`}>
             <ListItem button>
               <ListItemIcon>
-                <LocalConvenienceStoreIcon />
+                <StorefrontIcon />
               </ListItemIcon>
-              <ListItemText primary="Manage All Orders" />
+              <ListItemText primary="Manage Products" />
             </ListItem>
           </Link>
+      
+      <Link style={{ display: "flex", textDecoration: "none", color: "#333" }} to={`${url}/addACourse`}>
+        <ListItem button>
+          <ListItemIcon>
+            <AddShoppingCartIcon />
+          </ListItemIcon>
+          <ListItemText primary="Add A Course" />
+        </ListItem>
+      </Link>
 
-          <Link style={{ display: "flex", textDecoration: "none", color: "#333" }} to={`${url}/addACourse`}>
-            <ListItem button>
-              <ListItemIcon>
-                <AddShoppingCartIcon />
-              </ListItemIcon>
-              <ListItemText primary="Add A Course" />
-            </ListItem>
-          </Link>
 
-
-          <Link style={{ display: "flex", textDecoration: "none", color: "#333" }} to={`${url}/MakeAdmin`}>
-            <ListItem button>
-              <ListItemIcon>
-                <PersonAddIcon />
-              </ListItemIcon>
-              <ListItemText primary="Add Admin" />
-            </ListItem>
-          </Link>
-        </Box>
+      <Link style={{ display: "flex", textDecoration: "none", color: "#333" }} to={`${url}/MakeAdmin`}>
+        <ListItem button>
+          <ListItemIcon>
+            <PersonAddIcon />
+          </ListItemIcon>
+          <ListItemText primary="Add Admin" />
+        </ListItem>
+      </Link>
+    </Box>
+        }
         
 
         {/* Dashboard logout */}
@@ -193,21 +192,24 @@ const Dashboard = (props) => {
       >
         <Toolbar />
        <Switch>
-           <Route exact path={path}>
+           <Route  path={`${path}/myorder`}>
               <MyCourses></MyCourses> 
            </Route>
            <Route exact path={`${path}/myCourses`}>
               <MyCourses></MyCourses> 
            </Route>
-           <Route exact path={`${path}/manageAllOrders`}>
+           <AdminRoute exact path={`${path}/manageAllOrders`}>
               <ManageAllOrder></ManageAllOrder>
-           </Route>
-           <Route exact path={`${path}/addACourse`}>
+           </AdminRoute>
+           <AdminRoute exact path={`${path}/addACourse`}>
               <AddACourse></AddACourse>
-           </Route>
-           <Route exact path={`${path}/MakeAdmin`}>
+           </AdminRoute>
+           <AdminRoute exact path={`${path}/`}>
+            <ManageProduct></ManageProduct>
+          </AdminRoute>
+           <AdminRoute exact path={`${path}/MakeAdmin`}>
               <MakeAdmin></MakeAdmin>
-           </Route>
+           </AdminRoute>
        </Switch>
       </Box>
     </Box>

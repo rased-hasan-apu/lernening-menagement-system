@@ -4,7 +4,12 @@ import Course from '../Course/Course';
 import Navigation from '../Sheared/Navegation/Navigation';
 
 const Courses = () => {
-   
+  const [courses,setCourses]=useState([]);
+    useEffect(()=>{
+        fetch(`http://localhost:5000/addCourse`)
+        .then(res=>res.json())
+        .then(data=>setCourses(data));
+    },[])
   
     return (
         <div>
@@ -15,7 +20,13 @@ const Courses = () => {
           <span style={{ borderBottom: '3px solid red', fontStyle: 'italic' }}>To</span>p Courses
         </Typography>
         <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }} style={{ paddingTop: "30px" }}>
-          
+        {courses.map(course =>
+            <Course
+              key={course._id}
+              course={course}
+            ></Course>
+          )}
+
         </Grid>
       </Container>
     </Box>
