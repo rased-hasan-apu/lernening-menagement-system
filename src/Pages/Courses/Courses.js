@@ -6,7 +6,7 @@ import Navigation from '../Sheared/Navegation/Navigation';
 const Courses = () => {
   const [courses,setCourses]=useState([]);
     useEffect(()=>{
-        fetch(`http://localhost:5000/addCourse`)
+        fetch(`https://mighty-anchorage-74891.herokuapp.com/addCourse`)
         .then(res=>res.json())
         .then(data=>setCourses(data));
     },[])

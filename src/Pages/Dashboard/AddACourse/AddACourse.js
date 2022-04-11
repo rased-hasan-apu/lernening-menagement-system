@@ -9,7 +9,7 @@ const {register,handleSubmit,reset}=useForm();
 
 const onSubmit=data=>{
   console.log(data);
-  axios.post(`http://localhost:5000/addCourse`,data)
+  axios.post(`https://mighty-anchorage-74891.herokuapp.com/addCourse`,data)
   .then(res=>{
     if(res.data.insertedId){
       alert('course add successfully');

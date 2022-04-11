@@ -6,7 +6,7 @@ const MakeAdmin = () => {
     const [email,setEmail]=useState('');
     const handleAdminSubmit=e=>{
         const user={email};
-        fetch('http://localhost:5000/users/admin',{
+        fetch('https://mighty-anchorage-74891.herokuapp.com/users/admin',{
             method:'PUT',
             headers:{
                 'content-type':'application/json'

@@ -12,14 +12,14 @@ const Booking = () => {
     const {user}=useAuth();
     const [courses,setCourses]=useState([]);
     useEffect(()=>{
-        fetch(`http://localhost:5000/addCourse`)
+        fetch(`https://mighty-anchorage-74891.herokuapp.com/addCourse`)
         .then(res=>res.json())
         .then(data=>setCourses(data));
     },[])
     const {register, handleSubmit,reset } = useForm();
     const onSubmit = data =>{
         console.log(data);
-        axios.post(`http://localhost:5000/orderData`,data)
+        axios.post(`https://mighty-anchorage-74891.herokuapp.com/orderData`,data)
         .then(res=>{
               if(res.data.insertedId){
                alert('added successfully plasce check dashbord');

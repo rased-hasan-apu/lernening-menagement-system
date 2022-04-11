@@ -6,7 +6,7 @@ import Footer from '../Sheared/Footer/Footer';
 const ManageProduct = () => {
     const [myOrders, setmyOrders] = useState([]);
     useEffect(() => {
-        fetch(`http://localhost:5000/orderData`)
+        fetch(`https://mighty-anchorage-74891.herokuapp.com/orderData`)
           .then(res => res.json())
           .then(data => setmyOrders(data))
       }, []);
