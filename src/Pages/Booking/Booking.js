@@ -3,6 +3,7 @@ import { Box } from '@mui/system';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useHistory } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import Navigation from '../Sheared/Navegation/Navigation';
@@ -11,6 +12,7 @@ const Booking = () => {
     const {serviceId}=useParams();
     const {user}=useAuth();
     const [courses,setCourses]=useState([]);
+    const history = useHistory();
     useEffect(()=>{
         fetch(`https://mighty-anchorage-74891.herokuapp.com/addCourse`)
         .then(res=>res.json())
@@ -18,11 +20,13 @@ const Booking = () => {
     },[])
     const {register, handleSubmit,reset } = useForm();
     const onSubmit = data =>{
+       
         console.log(data);
         axios.post(`https://mighty-anchorage-74891.herokuapp.com/orderData`,data)
         .then(res=>{
               if(res.data.insertedId){
                alert('added successfully plasce check dashbord');
+               history.push('/dashboard');
                reset();
               }
         })

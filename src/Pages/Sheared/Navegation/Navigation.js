@@ -97,7 +97,7 @@ const Navigation = () => {
       </MenuItem>
       <MenuItem>
         <IconButton>
-          <Link style={{ textDecoration: 'none', color: "black", fontSize: "18px" }} to="/shop">Shop</Link>
+          <Link style={{ textDecoration: 'none', color: "black", fontSize: "18px" }} to="/courses">Courses</Link>
         </IconButton>
       </MenuItem>
       <MenuItem>
